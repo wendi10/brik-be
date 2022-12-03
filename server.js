@@ -14,11 +14,9 @@ app.get("/products", (req, res) => {
       req.query
     )}`,
     (err, rows) => {
-      console.log(rows, "aaa");
       const totalData = rows[0]?.total_data;
 
       if (err) {
-        console.log("ccc");
         console.log(err);
         return;
       }
@@ -81,8 +79,6 @@ app.post("/products", (req, res) => {
     description,
   } = req.body;
 
-  console.log(req.body);
-
   connection.query(
     `INSERT INTO products (categoryId, categoryName, sku, name, description, weight, width, length, height, image, price) VALUES (${categoryId}, '${categoryName}', '${sku}', '${name}', '${description}', ${weight}, ${width}, ${length}, ${height}, '${image}', ${price})`,
     (err, rows) => {
@@ -110,7 +106,6 @@ function setFilterProducts(filter) {
 
   if (name) {
     params.push(`name LIKE '%${name}%'`);
-    console.log(params, "aaa");
   }
 
   if (categoryName) {
